@@ -1,0 +1,154 @@
+C51 COMPILER V9.59.0.0   AD                                                                06/10/2020 11:21:10 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE AD
+OBJECT MODULE PLACED IN .\Objects\ad.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ad.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ad.lst
+                    -) TABS(2) OBJECT(.\Objects\ad.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include <intrins.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          sbit dula=P2^6;
+   6          sbit wela=P2^7;
+   7          sbit adwr=P3^6;
+   8          sbit adrd=P3^7;
+   9          uchar code table[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71,0x76,0
+             -xf3,0x38,0x00,0x40};
+  10          uchar code loc[]={0x7e,0x7d,0x7b,0xf7,0xef,0xdf,0xc0};
+  11          
+  12          void num_display(uchar,uchar);
+  13          void delay_ms(uint);
+  14          
+  15          void main()
+  16          {
+  17   1      uchar a,adval;
+  18   1        while(1)
+  19   1        {adwr=1;
+  20   2          _nop_();
+  21   2          adwr=0;
+  22   2          _nop_();
+  23   2          adwr=1;
+  24   2          
+  25   2          for(a=10;a>0;a--){
+  26   3            
+  27   3      num_display(2,adval);}
+  28   2        
+  29   2          
+  30   2          P1=0xff;
+  31   2          adrd=1;
+  32   2          _nop_();
+  33   2          adrd=0;
+  34   2          _nop_();
+  35   2        adval=P1;
+  36   2          adrd=1;
+  37   2          }
+  38   1      }
+  39          void delay_ms(uint a)
+  40          {
+  41   1        uint i;
+  42   1        uchar j;
+  43   1        for(i=a;i>0;i--)
+  44   1        for(j=114;j>0;j--);
+  45   1      }
+  46          
+  47          
+  48          void num_display(uchar a,uchar b)
+  49          {
+  50   1        if(b<10)
+  51   1        {
+  52   2        P0=0xff;
+  53   2        wela=1;
+C51 COMPILER V9.59.0.0   AD                                                                06/10/2020 11:21:10 PAGE 2   
+
+  54   2        P0=loc[a+1];
+  55   2        wela=0;
+  56   2        P0=0x00;
+  57   2        dula=1;
+  58   2        P0=table[19];
+  59   2        dula=0;
+  60   2        delay_ms(2);  
+  61   2          
+  62   2        P0=0xff;
+  63   2        wela=1;
+  64   2        P0=loc[a];
+  65   2        wela=0;
+  66   2        P0=0x00;
+  67   2        dula=1;
+  68   2        P0=table[b];
+  69   2        dula=0;
+  70   2        delay_ms(2);
+  71   2        }
+  72   1        if((b>=10)&&(b<100))
+  73   1        {
+  74   2        P0=0xff;
+  75   2        wela=1;
+  76   2        P0=loc[a];
+  77   2        wela=0;
+  78   2        P0=0x00;
+  79   2        dula=1;
+  80   2        P0=table[b%10];
+  81   2        dula=0;
+  82   2        delay_ms(2);
+  83   2          
+  84   2        P0=0xff;
+  85   2        wela=1;
+  86   2        P0=loc[a-1];
+  87   2        wela=0;
+  88   2        P0=0x00;
+  89   2        dula=1;
+  90   2        P0=table[b/10];
+  91   2        dula=0;
+  92   2        delay_ms(2);
+  93   2        }
+  94   1        if(b>=100)
+  95   1        {
+  96   2        P0=0xff;
+  97   2        wela=1;
+  98   2        P0=loc[a];
+  99   2        wela=0;
+ 100   2        P0=0x00;
+ 101   2        dula=1;
+ 102   2        P0=table[b%10];
+ 103   2        dula=0;
+ 104   2        delay_ms(2);
+ 105   2          
+ 106   2        P0=0xff;
+ 107   2        wela=1;
+ 108   2        P0=loc[a-1];
+ 109   2        wela=0;
+ 110   2        P0=0x00;
+ 111   2        dula=1;
+ 112   2        P0=table[b%100/10];
+ 113   2        dula=0;
+ 114   2        delay_ms(2);
+ 115   2          
+C51 COMPILER V9.59.0.0   AD                                                                06/10/2020 11:21:10 PAGE 3   
+
+ 116   2        P0=0xff;
+ 117   2        wela=1;
+ 118   2        P0=loc[a-2];
+ 119   2        wela=0;
+ 120   2        P0=0x00;
+ 121   2        dula=1;
+ 122   2        P0=table[b/100];
+ 123   2        dula=0;
+ 124   2        delay_ms(2);
+ 125   2      }}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    338    ----
+   CONSTANT SIZE    =     28    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

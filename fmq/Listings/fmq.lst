@@ -1,0 +1,71 @@
+C51 COMPILER V9.59.0.0   FMQ                                                               04/08/2020 14:37:33 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE FMQ
+OBJECT MODULE PLACED IN .\Objects\fmq.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE fmq.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\fmq.l
+                    -st) TABS(2) OBJECT(.\Objects\fmq.obj)
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          uchar temp;
+   6          sbit beep=P2^3;
+   7          void delay(uint a);
+   8          void main()
+   9            {
+  10   1          uchar m;
+  11   1          temp=0xfe;
+  12   1          while(1)
+  13   1          {
+  14   2          for(m=0;m<7;m++)
+  15   2          {
+  16   3            P1=temp;
+  17   3            beep=0;
+  18   3            delay(200);
+  19   3            beep=1;
+  20   3            P1=0xff;
+  21   3            delay(200);
+  22   3            temp=_crol_(temp,1);//rolling to left
+  23   3          }
+  24   2          temp=0x7f;
+  25   2          for(m=0;m<7;m++)
+  26   2          {
+  27   3            P1=temp;
+  28   3            beep=0;
+  29   3            delay(200);
+  30   3            beep=1;
+  31   3            P1=0xff;
+  32   3            delay(200);
+  33   3            temp=_cror_(temp,1);//rolling to right
+  34   3          }
+  35   2          beep=0;
+  36   2          delay(500);
+  37   2          beep=1;
+  38   2        }
+  39   1      }
+  40          void delay(uint a)
+  41          {
+  42   1          uint i,j;
+  43   1          for(i=a;i>0;i--)
+  44   1            for(j=114;j>0;j--);
+  45   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    142    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       1
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.59.0.0   FMQ                                                               04/08/2020 14:37:33 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

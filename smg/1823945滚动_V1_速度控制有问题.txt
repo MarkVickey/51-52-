@@ -1,0 +1,184 @@
+#include<reg52.h>
+#define uint unsigned int
+#define uchar unsigned char
+sbit dula = P2^6;
+sbit wela = P2^7;
+uchar code table[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71,0x76,0xf3,0x38,0x00};
+uchar code loc[]={0xfe,0xfd,0xfb,0xf7,0xef,0xdf,0xc0};
+uchar code l[]={5,4,3,2,1,0};
+uchar code x[]={1,8,2,3,9,4,5,19};
+void delay_ms(uint);
+void L(uint,uint);
+/*
+void yi(uint a);
+void ba(uint a);
+void er(uint a);
+void san(uint a);
+void jiu(uint a);
+void si(uint a);
+void wu(uint a);
+*/
+
+void main()
+{
+	
+	uchar i;
+  uchar j;
+  uchar k;
+ uchar m;
+  uint speed;
+	while(1)
+	{	
+		for(i=0;i<8;i++)
+		{
+		if(i<6)
+		{
+			
+			for(speed=40+5*(10-i);speed>0;speed--)
+		for(j=i+1,k=0;j>0;j--,k++)
+		{
+		L(l[j-1],x[k]);
+	}}
+		else if(i==6)
+			for(speed=50;speed>0;speed--)
+		for(j=i,k=1;j>0;j--,k++)
+		{
+		L(l[j-1],x[k]);
+	}
+	else 
+		{
+		for(m=2;m<7;m++)
+		for(speed=50;speed>0;speed--)
+		for(j=6,k=m;j>0;j--,k++)
+		{	
+			if(k>=7)k=7;
+		L(l[j-1],x[k]);
+	
+		}			
+		}
+		}
+	L(0xc0,0xff);delay_ms(2000)	;
+	
+	}
+	}
+	
+
+
+void delay_ms(uint a)
+{
+	uint i;
+	uint j;
+	for(i=a;i>0;i--)
+	for(j=114;j>0;j--);
+}
+
+void L(uint a,uint b)
+{
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[b];
+	dula=0;
+	delay_ms(1);}
+
+
+
+/*
+
+void yi(uint a)
+{
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[1];
+	dula=0;
+	delay_ms(3);}
+
+void ba(uint a)
+{
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[8];
+	dula=0;
+	delay_ms(3);}
+
+
+	void er(uint a)
+	{
+	
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[2];
+	dula=0;
+	delay_ms(3);
+	
+	}	
+	
+	void san(uint a)
+	{
+	
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[3];
+	dula=0;
+	delay_ms(3);
+	
+	}
+	void jiu(uint a)
+	{
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[9];
+	dula=0;
+	delay_ms(3);	
+	}
+	void si(uint a)
+	{
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[4];
+	dula=0;
+	
+	delay_ms(3);
+	}
+	
+	void wu(uint a)
+	{
+	P0=0xff;
+	wela=1;
+	P0=loc[a];
+	wela=0;
+	P0=0x00;
+	dula=1;
+	P0=table[5];
+	dula=0;
+	
+	delay_ms(3);
+	}
+	*/

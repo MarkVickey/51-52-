@@ -1,0 +1,32 @@
+#include<reg52.h>
+#include<intrins.h>
+#define uint unsigned int
+#define uchar unsigned char
+uchar temp;
+void delay(uint a);
+void main()
+	{char m;
+		while(1)
+		{
+		temp=0xfe;
+		for(m=0;m<7;m++)
+		{
+			P1=temp;
+			delay(200);
+			temp=_crol_(temp,1);//rolling to left
+		}
+		
+		for(m=0;m<8;m++)
+		{
+			P1=temp;
+			delay(200);
+			temp=_cror_(temp,1);//rolling to right
+		}
+	}
+}
+void delay(uint a)
+{
+		uint i,j;
+		for(i=a;i>0;i--)
+			for(j=114;j>0;j--);
+}
